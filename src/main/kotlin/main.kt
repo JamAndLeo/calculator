@@ -1,26 +1,37 @@
+import java.math.BigDecimal
+
 fun main() {
     println("Я вас приветствую в консольном приложении КАЛЬКУЛЯТОР!")
     println("Когда захотите выйте введите: EXIT")
     var x = true
+    // можно просто while (true)
     while (x) {
         println("Введите необходимые числа и операцию, я могу: +, -, *, /")
+        // можно удалить пробелы и пользователь сможет их ставить тип 2   + 3
+        // readlnOrNull()?.replace(" ", "")
         val forCalculate = readlnOrNull()
         if (forCalculate?.trim()?.uppercase()=="EXIT") {
             println("До новых встреч!")
+            // лучше закончить словом break
             return
         }
         if (check(forCalculate)) calculate(forCalculate!!)
     }
 }
-
+// пока у тебя один файл, но уже набивай руку делать методы не вызываемые извне private
 fun calculate(str: String) {
     val toNum = str.split("/", "+", "*", "-")
+    // замени тут на BigDecimal, типа такого BigDecimal.valueOf(toNum[0].trim().toDouble())
+    // и нормас будет печататься
     val n1 = toNum[0].trim().toDouble()
     val n2 = toNum[1].trim().toDouble()
     print("РЕЗУЛЬТАТ: $n1 ")
+    // var result = BigDecimal.ZERO
     var result = 0.0
+    // можно просто when {
     when (str.contains("")) {
         str.contains("+") -> {
+            // пиши всегда на новых строчках
             print("+"); result = n1 + n2
         }
 
@@ -44,6 +55,7 @@ fun calculate(str: String) {
 }
 
 fun check(str: String?): Boolean {
+    // мне кажется эту переменную можно удалить и где тебе надо писать return false и return true
     var checkSTR = false
     //step #1
     if (str == null) {
@@ -52,6 +64,7 @@ fun check(str: String?): Boolean {
     }
 
     //step #2 - проверим что значение не пустое
+    // str.isEmpty()
     if (str == "") {
         println("(!) [пустая строка] Пожалуйста введите операцию по маске: число-оператор-число (Enter)")
         return checkSTR
